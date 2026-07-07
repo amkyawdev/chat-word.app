@@ -1,0 +1,248 @@
+/* Custom Animations - Sky Blue Theme */
+
+/* Sky Pulse Animation */
+@keyframes skyPulse {
+  0%, 100% {
+    background-color: #87CEEB;
+    box-shadow: 0 0 10px rgba(135, 206, 235, 0.5);
+  }
+  50% {
+    background-color: #00BFFF;
+    box-shadow: 0 0 30px rgba(0, 191, 255, 0.8);
+  }
+}
+
+/* Sky Float Animation */
+@keyframes skyFloat {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-10px);
+    opacity: 1;
+  }
+}
+
+/* Sky Wave Animation */
+@keyframes skyWave {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Sky Shine Animation */
+@keyframes skyShine {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* Cloud Drift Animation */
+@keyframes cloudDrift {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateX(100vw);
+    opacity: 0;
+  }
+}
+
+/* Sky Fade In Animation */
+@keyframes skyFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Sky Bounce Animation */
+@keyframes skyBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+/* Sky Spin Animation */
+@keyframes skySpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Sky Glow Pulse Animation */
+@keyframes skyGlowPulse {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(135, 206, 235, 0.5),
+                0 0 10px rgba(135, 206, 235, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(135, 206, 235, 0.8),
+                0 0 30px rgba(0, 191, 255, 0.5);
+  }
+}
+
+/* Animation Classes */
+.animate-sky-pulse {
+  animation: skyPulse 2s ease-in-out infinite;
+}
+
+.animate-sky-float {
+  animation: skyFloat 3s ease-in-out infinite;
+}
+
+.animate-sky-wave {
+  animation: skyWave 8s ease infinite;
+  background-size: 200% 200%;
+}
+
+.animate-sky-shine {
+  animation: skyShine 3s ease-in-out infinite;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.8) 50%, 
+    transparent 100%);
+  background-size: 200% 100%;
+}
+
+.animate-cloud-drift {
+  animation: cloudDrift 20s linear infinite;
+}
+
+.animate-sky-fade-in {
+  animation: skyFadeIn 0.8s ease-out forwards;
+}
+
+.animate-sky-bounce {
+  animation: skyBounce 1s ease-in-out infinite;
+}
+
+.animate-sky-spin {
+  animation: skySpin 2s linear infinite;
+}
+
+.animate-sky-glow-pulse {
+  animation: skyGlowPulse 2s ease-in-out infinite;
+}
+
+/* Staggered Animation Delays */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* Loading Spinner - Sky Blue Theme */
+.loader-sky {
+  border: 4px solid rgba(135, 206, 235, 0.3);
+  border-top: 4px solid #00BFFF;
+  border-right: 4px solid #1E90FF;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: skySpin 1s linear infinite;
+}
+
+/* Sky Blue Progress Bar */
+.progress-sky {
+  height: 8px;
+  background: rgba(135, 206, 235, 0.3);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-sky-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #87CEEB, #00BFFF, #1E90FF);
+  background-size: 200% 100%;
+  animation: skyWave 2s ease infinite;
+  border-radius: 4px;
+}
+
+/* Sky Blue Hover Transforms */
+.hover-lift-sky {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift-sky:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(135, 206, 235, 0.4);
+}
+
+/* Sky Blue Ripple Effect */
+.ripple-sky::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(135, 206, 235, 0.4);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.ripple-sky:active::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* Sky Blue Transition Utilities */
+.transition-sky-fast {
+  transition: all 0.2s ease;
+}
+
+.transition-sky-normal {
+  transition: all 0.3s ease;
+}
+
+.transition-sky-slow {
+  transition: all 0.5s ease;
+}
+
+/* Sky Blue Transform Utilities */
+.scale-sky:hover {
+  transform: scale(1.05);
+}
+
+.scale-sky-reverse:hover {
+  transform: scale(0.95);
+}
+
+/* Sky Blue Color Transitions */
+.color-sky-shift {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.color-sky-shift:hover {
+  background-color: #87CEEB;
+  color: #1E90FF;
+}

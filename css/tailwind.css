@@ -1,0 +1,127 @@
+/* Tailwind CSS Configuration */
+
+/* Custom Sky Blue Theme Extension */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Sky Blue Custom Classes */
+@layer base {
+  body {
+    @apply bg-gradient-to-b from-sky-200 via-sky-100 to-sky-50;
+  }
+}
+
+@layer components {
+  /* Sky Blue Buttons */
+  .btn-sky {
+    @apply bg-sky-400 hover:bg-sky-500 text-white font-semibold py-2 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300;
+  }
+  
+  .btn-sky-outline {
+    @apply border-2 border-sky-400 text-sky-500 hover:bg-sky-100 font-semibold py-2 px-6 rounded-lg transition-all duration-300;
+  }
+  
+  /* Sky Blue Cards */
+  .card-sky {
+    @apply bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-sky-200/50;
+  }
+  
+  .card-sky-header {
+    @apply bg-gradient-to-r from-sky-300 to-sky-400 text-white px-6 py-4 rounded-t-xl;
+  }
+  
+  /* Sky Blue Inputs */
+  .input-sky {
+    @apply w-full px-4 py-2 border-2 border-sky-300 rounded-lg focus:border-sky-500 focus:ring-4 focus:ring-sky-200 transition-all duration-300;
+  }
+  
+  /* Sky Blue Navigation */
+  .nav-sky {
+    @apply bg-gradient-to-r from-sky-400 via-sky-500 to-sky-600 shadow-lg;
+  }
+  
+  .nav-link-sky {
+    @apply text-white/90 hover:text-white hover:bg-white/20 px-4 py-2 rounded-lg transition-all duration-300;
+  }
+  
+  /* Sky Blue Badges */
+  .badge-sky {
+    @apply bg-gradient-to-r from-sky-400 to-sky-500 text-white px-3 py-1 rounded-full text-sm font-semibold;
+  }
+  
+  /* Sky Blue Gradients */
+  .gradient-sky {
+    @apply bg-gradient-to-br from-sky-200 via-sky-100 to-sky-50;
+  }
+  
+  .gradient-sky-dark {
+    @apply bg-gradient-to-br from-sky-400 via-sky-500 to-sky-600;
+  }
+  
+  .gradient-sky-light {
+    @apply bg-gradient-to-br from-sky-100 via-sky-50 to-white;
+  }
+  
+  /* Sky Blue Chat Bubbles */
+  .chat-bubble-sky {
+    @apply bg-white rounded-2xl p-4 shadow-md border border-sky-200;
+  }
+  
+  .chat-bubble-sky-sent {
+    @apply bg-gradient-to-br from-sky-400 to-sky-500 text-white ml-auto border border-sky-400;
+  }
+  
+  .chat-bubble-sky-received {
+    @apply bg-white border-l-4 border-sky-400;
+  }
+  
+  /* Sky Blue Sidebar */
+  .sidebar-sky {
+    @apply bg-white/90 backdrop-blur-sm border-r border-sky-200 h-full;
+  }
+  
+  /* Sky Blue Hover Effects */
+  .hover-sky {
+    @apply transition-colors duration-300;
+  }
+  
+  .hover-sky:hover {
+    @apply bg-sky-100 text-sky-700;
+  }
+  
+  /* Sky Blue Glass Effect */
+  .glass-sky {
+    @apply bg-white/70 backdrop-blur-md border border-white/50 shadow-xl;
+  }
+}
+
+@layer utilities {
+  /* Custom Sky Blue Utilities */
+  .text-shadow-sky {
+    text-shadow: 2px 2px 4px rgba(135, 206, 235, 0.5);
+  }
+  
+  .border-sky-glow {
+    box-shadow: 0 0 20px rgba(135, 206, 235, 0.5);
+  }
+  
+  .animate-sky-pulse {
+    animation: skyPulse 2s ease-in-out infinite;
+  }
+}
+
+/* Custom Sky Blue Color Palette Extension */
+@layer utilities {
+  .bg-sky-warm {
+    background: linear-gradient(180deg, #87CEEB 0%, #B0E0E6 100%);
+  }
+  
+  .bg-sky-cool {
+    background: linear-gradient(180deg, #00BFFF 0%, #87CEEB 100%);
+  }
+  
+  .bg-sky-vibrant {
+    background: linear-gradient(135deg, #1E90FF 0%, #00BFFF 50%, #87CEEB 100%);
+  }
+}
