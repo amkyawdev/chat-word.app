@@ -1,0 +1,42 @@
+{
+  "name": "chat-word",
+  "version": "1.0.0",
+  "description": "A modern chat application with sky blue theme",
+  "main": "index.html",
+  "scripts": {
+    "dev": "tailwindcss -i ./css/tailwind.css -o ./css/build.css --watch",
+    "build": "tailwindcss -i ./css/tailwind.css -o ./css/build.css --minify",
+    "serve": "npx serve .",
+    "start": "npm run serve"
+  },
+  "keywords": [
+    "chat",
+    "messaging",
+    "realtime",
+    "web-app",
+    "sky-blue",
+    "tailwind"
+  ],
+  "author": "Chat Word Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/amkyawdev/chat-word.app"
+  },
+  "bugs": {
+    "url": "https://github.com/amkyawdev/chat-word.app/issues"
+  },
+  "homepage": "https://github.com/amkyawdev/chat-word.app#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.4.1",
+    "autoprefixer": "^10.4.17",
+    "postcss": "^8.4.35",
+    "serve": "^14.2.1"
+  },
+  "dependencies": {
+    "three": "^0.161.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

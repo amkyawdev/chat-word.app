@@ -1,0 +1,136 @@
+{
+  "messages": [
+    {
+      "id": 1,
+      "chatId": "global",
+      "userId": 1,
+      "username": "Administrator",
+      "avatar": "👨‍💼",
+      "text": "Welcome to Chat Word! 🎉",
+      "timestamp": "2024-01-15T10:00:00Z",
+      "type": "system"
+    },
+    {
+      "id": 2,
+      "chatId": "global",
+      "userId": 2,
+      "username": "Alice Smith",
+      "avatar": "👩",
+      "text": "Hello everyone! How are you all doing today?",
+      "timestamp": "2024-01-15T10:01:00Z",
+      "type": "message"
+    },
+    {
+      "id": 3,
+      "chatId": "global",
+      "userId": 3,
+      "username": "Bob Johnson",
+      "avatar": "👨",
+      "text": "Hey Alice! Doing great, thanks for asking! 😊",
+      "timestamp": "2024-01-15T10:02:00Z",
+      "type": "message"
+    },
+    {
+      "id": 4,
+      "chatId": "global",
+      "userId": 4,
+      "username": "Charlie Brown",
+      "avatar": "🧑",
+      "text": "This chat app looks amazing! Love the sky blue theme 🩵",
+      "timestamp": "2024-01-15T10:03:00Z",
+      "type": "message"
+    },
+    {
+      "id": 5,
+      "chatId": "global",
+      "userId": 5,
+      "username": "Diana Prince",
+      "avatar": "👸",
+      "text": "Agreed! The design is really clean and modern.",
+      "timestamp": "2024-01-15T10:04:00Z",
+      "type": "message"
+    },
+    {
+      "id": 6,
+      "chatId": "global",
+      "userId": 2,
+      "username": "Alice Smith",
+      "avatar": "👩",
+      "text": "Anyone up for a group chat later?",
+      "timestamp": "2024-01-15T10:05:00Z",
+      "type": "message"
+    },
+    {
+      "id": 7,
+      "chatId": "global",
+      "userId": 3,
+      "username": "Bob Johnson",
+      "avatar": "👨",
+      "text": "Count me in! 🎉",
+      "timestamp": "2024-01-15T10:06:00Z",
+      "type": "message"
+    },
+    {
+      "id": 8,
+      "chatId": "global",
+      "userId": 4,
+      "username": "Charlie Brown",
+      "avatar": "🧑",
+      "text": "Sounds fun! What time works for everyone?",
+      "timestamp": "2024-01-15T10:07:00Z",
+      "type": "message"
+    },
+    {
+      "id": 9,
+      "chatId": "global",
+      "userId": 1,
+      "username": "Administrator",
+      "avatar": "👨‍💼",
+      "text": "Great to see such active participation! Keep chatting! 💬",
+      "timestamp": "2024-01-15T10:08:00Z",
+      "type": "system"
+    },
+    {
+      "id": 10,
+      "chatId": "global",
+      "userId": 5,
+      "username": "Diana Prince",
+      "avatar": "👸",
+      "text": "Let's do 3 PM!",
+      "timestamp": "2024-01-15T10:09:00Z",
+      "type": "message"
+    }
+  ],
+  "chats": [
+    {
+      "id": "global",
+      "name": "Global Chat",
+      "type": "public",
+      "description": "Public chat room for all users",
+      "createdAt": "2024-01-01T00:00:00Z",
+      "memberCount": 5,
+      "messageCount": 10
+    },
+    {
+      "id": "1-2",
+      "name": "Alice & Administrator",
+      "type": "private",
+      "participants": [1, 2],
+      "createdAt": "2024-01-10T00:00:00Z",
+      "messageCount": 15
+    },
+    {
+      "id": "2-3",
+      "name": "Alice & Bob",
+      "type": "private",
+      "participants": [2, 3],
+      "createdAt": "2024-01-11T00:00:00Z",
+      "messageCount": 23
+    }
+  ],
+  "metadata": {
+    "lastUpdated": "2024-01-15T10:09:00Z",
+    "totalMessages": 10,
+    "totalChats": 3
+  }
+}

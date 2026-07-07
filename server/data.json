@@ -1,0 +1,120 @@
+{
+  "app": {
+    "name": "Chat Word",
+    "version": "1.0.0",
+    "description": "A modern chat application",
+    "author": "Chat Word Team"
+  },
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "email": "admin@chatword.app",
+      "displayName": "Administrator",
+      "avatar": "👨‍💼",
+      "role": "admin",
+      "status": "online",
+      "createdAt": "2024-01-01T00:00:00Z",
+      "lastSeen": "2024-01-15T10:30:00Z"
+    },
+    {
+      "id": 2,
+      "username": "alice",
+      "email": "alice@example.com",
+      "displayName": "Alice Smith",
+      "avatar": "👩",
+      "role": "user",
+      "status": "online",
+      "createdAt": "2024-01-02T00:00:00Z",
+      "lastSeen": "2024-01-15T10:25:00Z"
+    },
+    {
+      "id": 3,
+      "username": "bob",
+      "email": "bob@example.com",
+      "displayName": "Bob Johnson",
+      "avatar": "👨",
+      "role": "user",
+      "status": "online",
+      "createdAt": "2024-01-03T00:00:00Z",
+      "lastSeen": "2024-01-15T10:20:00Z"
+    },
+    {
+      "id": 4,
+      "username": "charlie",
+      "email": "charlie@example.com",
+      "displayName": "Charlie Brown",
+      "avatar": "🧑",
+      "role": "user",
+      "status": "online",
+      "createdAt": "2024-01-04T00:00:00Z",
+      "lastSeen": "2024-01-15T10:15:00Z"
+    },
+    {
+      "id": 5,
+      "username": "diana",
+      "email": "diana@example.com",
+      "displayName": "Diana Prince",
+      "avatar": "👸",
+      "role": "user",
+      "status": "offline",
+      "createdAt": "2024-01-05T00:00:00Z",
+      "lastSeen": "2024-01-15T09:00:00Z"
+    }
+  ],
+  "friendships": [
+    {
+      "id": 1,
+      "userId": 1,
+      "friendId": 2,
+      "status": "accepted",
+      "createdAt": "2024-01-06T00:00:00Z"
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "friendId": 3,
+      "status": "accepted",
+      "createdAt": "2024-01-07T00:00:00Z"
+    },
+    {
+      "id": 3,
+      "userId": 2,
+      "friendId": 3,
+      "status": "accepted",
+      "createdAt": "2024-01-08T00:00:00Z"
+    },
+    {
+      "id": 4,
+      "userId": 2,
+      "friendId": 4,
+      "status": "pending",
+      "createdAt": "2024-01-09T00:00:00Z"
+    }
+  ],
+  "settings": {
+    "defaultLanguage": "my",
+    "defaultTheme": "sky",
+    "notifications": {
+      "enabled": true,
+      "sound": true,
+      "desktop": false
+    },
+    "privacy": {
+      "showOnlineStatus": true,
+      "showLastSeen": true,
+      "allowFriendRequests": true
+    },
+    "appearance": {
+      "darkMode": false,
+      "compactMode": false
+    }
+  },
+  "statistics": {
+    "totalUsers": 5,
+    "totalMessages": 1234,
+    "totalFriendships": 4,
+    "onlineUsers": 3,
+    "activeToday": 5
+  }
+}

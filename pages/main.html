@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Word - Main</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <style>
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            padding: 20px;
+            background: linear-gradient(180deg, #87CEEB 0%, #B0E0E6 50%, #E0F4FF 100%);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #00BFFF, #1E90FF);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(135, 206, 235, 0.4);
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+        
+        .chat-area {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 20px;
+            height: calc(100vh - 150px);
+        }
+        
+        .friends-panel {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(135, 206, 235, 0.3);
+            overflow-y: auto;
+        }
+        
+        .chat-panel {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(135, 206, 235, 0.3);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chat-header {
+            border-bottom: 2px solid #87CEEB;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        
+        .chat-input {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #87CEEB;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        
+        .chat-input button {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #00BFFF, #1E90FF);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .chat-input button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(135, 206, 235, 0.5);
+        }
+        
+        @media (max-width: 768px) {
+            .chat-area {
+                grid-template-columns: 1fr;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar will be loaded here -->
+        <div id="sidebar-container"></div>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="header">
+                <h1>💬 Public Chat</h1>
+                <p>Welcome to the global chat room</p>
+            </div>
+            
+            <div class="chat-area">
+                <!-- Friends List -->
+                <div class="friends-panel">
+                    <h3 style="color: #1E90FF; margin-bottom: 15px;">👥 Online Users</h3>
+                    <div id="friends-list">
+                        <!-- Friends will be loaded here -->
+                    </div>
+                </div>
+                
+                <!-- Chat Panel -->
+                <div class="chat-panel">
+                    <div class="chat-header">
+                        <h3 style="color: #1E90FF;">🌐 Global Chat</h3>
+                        <small style="color: #666;">Chat with everyone online</small>
+                    </div>
+                    
+                    <div class="chat-messages" id="chat-messages">
+                        <!-- Messages will appear here -->
+                        <div class="chat-bubble received">
+                            <strong>System</strong>
+                            <p>Welcome to the chat! Start messaging...</p>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-input">
+                        <input type="text" id="message-input" placeholder="Type your message..." autocomplete="off">
+                        <button id="send-btn">Send</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="../components/sidebar.js"></script>
+    <script src="../js/app.js"></script>
+    <script>
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load sidebar
+            loadSidebar();
+            
+            // Load friends list
+            loadFriendsList();
+            
+            // Chat functionality
+            const messageInput = document.getElementById('message-input');
+            const sendBtn = document.getElementById('send-btn');
+            const chatMessages = document.getElementById('chat-messages');
+            
+            function sendMessage() {
+                const message = messageInput.value.trim();
+                if (message) {
+                    addMessage('You', message, 'sent');
+                    messageInput.value = '';
+                }
+            }
+            
+            sendBtn.addEventListener('click', sendMessage);
+            messageInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') sendMessage();
+            });
+            
+            function addMessage(sender, text, type) {
+                const bubble = document.createElement('div');
+                bubble.className = `chat-bubble ${type}`;
+                bubble.innerHTML = `<strong>${sender}</strong><p>${text}</p>`;
+                chatMessages.appendChild(bubble);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+        });
+    </script>
+</body>
+</html>

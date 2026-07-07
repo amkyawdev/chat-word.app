@@ -1,0 +1,122 @@
+{
+  "app": {
+    "name": "Chat Word",
+    "tagline": "Connecting through conversation",
+    "loading": "Loading...",
+    "version": "Version 1.0.0"
+  },
+  "nav": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "settings": "Settings",
+    "about": "About",
+    "logout": "Logout"
+  },
+  "chat": {
+    "publicChat": "Public Chat",
+    "privateChat": "Private Chat",
+    "send": "Send",
+    "typeMessage": "Type a message...",
+    "online": "Online",
+    "offline": "Offline",
+    "lastSeen": "Last seen",
+    "justNow": "Just now",
+    "typing": "Typing...",
+    "messages": "Messages",
+    "noMessages": "No messages yet"
+  },
+  "friends": {
+    "title": "Friends",
+    "online": "Online",
+    "offline": "Offline",
+    "addFriend": "Add Friend",
+    "removeFriend": "Remove Friend",
+    "requests": "Friend Requests",
+    "suggestions": "Suggestions"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "overview": "Overview",
+    "totalUsers": "Total Users",
+    "totalMessages": "Total Messages",
+    "onlineNow": "Online Now",
+    "activeDays": "Active Days",
+    "recentActivity": "Recent Activity",
+    "messageActivity": "Message Activity",
+    "userGrowth": "User Growth"
+  },
+  "profile": {
+    "title": "Profile",
+    "personalInfo": "Personal Information",
+    "activityOverview": "Activity Overview",
+    "accountSecurity": "Account Security",
+    "messagesSent": "Messages Sent",
+    "friends": "Friends",
+    "daysActive": "Days Active",
+    "updateProfile": "Update Profile",
+    "changePassword": "Change Password",
+    "changeAvatar": "Change Avatar"
+  },
+  "settings": {
+    "title": "Settings",
+    "notifications": "Notifications",
+    "pushNotifications": "Push Notifications",
+    "soundAlerts": "Sound Alerts",
+    "desktopNotifications": "Desktop Notifications",
+    "appearance": "Appearance",
+    "themeColor": "Theme Color",
+    "darkMode": "Dark Mode",
+    "language": "Language",
+    "selectLanguage": "Select Language",
+    "privacy": "Privacy",
+    "showOnlineStatus": "Show Online Status",
+    "showLastSeen": "Show Last Seen",
+    "saveSettings": "Save Settings"
+  },
+  "about": {
+    "title": "About",
+    "ourStory": "Our Story",
+    "keyFeatures": "Key Features",
+    "ourTeam": "Our Team",
+    "versionInfo": "Version Information",
+    "realTimeChat": "Real-time Chat",
+    "beautifulThemes": "Beautiful Themes",
+    "multiLanguage": "Multi-language",
+    "responsiveDesign": "Responsive Design",
+    "privacyFirst": "Privacy First",
+    "fastPerformance": "Fast Performance"
+  },
+  "errors": {
+    "generic": "An error occurred",
+    "networkError": "Network connection failed",
+    "notFound": "Not found",
+    "unauthorized": "Unauthorized",
+    "serverError": "Server error",
+    "tryAgain": "Try again"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "confirm": "Confirm",
+    "search": "Search",
+    "loading": "Loading...",
+    "success": "Success",
+    "error": "Error",
+    "warning": "Warning",
+    "info": "Info",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "time": {
+    "justNow": "Just now",
+    "minutesAgo": "minutes ago",
+    "hoursAgo": "hours ago",
+    "daysAgo": "days ago",
+    "today": "Today",
+    "yesterday": "Yesterday"
+  }
+}

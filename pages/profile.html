@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Word - Profile</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <style>
+        .profile-content {
+            margin-left: 250px;
+            padding: 20px;
+            background: linear-gradient(180deg, #87CEEB 0%, #B0E0E6 50%, #E0F4FF 100%);
+            min-height: 100vh;
+        }
+        
+        .profile-header {
+            background: linear-gradient(135deg, #00BFFF, #1E90FF);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(135, 206, 235, 0.4);
+            position: relative;
+        }
+        
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid white;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #87CEEB, #00BFFF);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 72px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .profile-header h1 {
+            font-size: 32px;
+            margin-bottom: 5px;
+        }
+        
+        .profile-header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .profile-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .profile-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(135, 206, 235, 0.3);
+            margin-bottom: 20px;
+        }
+        
+        .profile-card h2 {
+            color: #1E90FF;
+            margin-bottom: 25px;
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .profile-form {
+            display: grid;
+            gap: 20px;
+        }
+        
+        .form-group {
+            display: grid;
+            gap: 8px;
+        }
+        
+        .form-group label {
+            font-weight: 600;
+            color: #1E90FF;
+            font-size: 14px;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            padding: 12px;
+            border: 2px solid #87CEEB;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #1E90FF;
+            box-shadow: 0 0 0 3px rgba(135, 206, 235, 0.3);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .stats-overview {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .stat-box {
+            background: linear-gradient(135deg, #E0F4FF, #B0E0E6);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .stat-box .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1E90FF;
+        }
+        
+        .stat-box .stat-label {
+            color: #666;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        .btn-update {
+            background: linear-gradient(135deg, #00BFFF, #1E90FF);
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .btn-update:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(135, 206, 235, 0.5);
+        }
+        
+        .avatar-upload {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .upload-btn {
+            background: linear-gradient(135deg, #87CEEB, #00BFFF);
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        .upload-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(135, 206, 235, 0.5);
+        }
+        
+        @media (max-width: 768px) {
+            .profile-content {
+                margin-left: 0;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-overview {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="sidebar-container"></div>
+    
+    <div class="profile-content">
+        <div class="profile-header">
+            <div class="profile-avatar">👤</div>
+            <h1>User Profile</h1>
+            <p>Manage your personal information</p>
+        </div>
+        
+        <div class="profile-container">
+            <!-- Profile Stats -->
+            <div class="profile-card">
+                <h2>📊 Activity Overview</h2>
+                <div class="stats-overview">
+                    <div class="stat-box">
+                        <div class="stat-number">245</div>
+                        <div class="stat-label">Messages Sent</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">89</div>
+                        <div class="stat-label">Friends</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">30</div>
+                        <div class="stat-label">Days Active</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Profile Information -->
+            <div class="profile-card">
+                <h2>👤 Personal Information</h2>
+                <form class="profile-form">
+                    <div class="avatar-upload">
+                        <div class="profile-avatar" style="width: 100px; height: 100px; font-size: 48px;">
+                            👤
+                        </div>
+                        <button type="button" class="upload-btn">📷 Change Avatar</button>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" value="John" placeholder="Enter first name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" value="Doe" placeholder="Enter last name">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" value="@johndoe" placeholder="Choose a username">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" value="john.doe@example.com" placeholder="Enter email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bio">Bio</label>
+                        <textarea id="bio" rows="4" placeholder="Tell us about yourself...">Hello! I'm using Chat Word to connect with friends and communities around the world. 🚀</textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="country">Country</label>
+                            <input type="text" id="country" value="Myanmar" placeholder="Your country">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input type="text" id="city" value="Yangon" placeholder="Your city">
+                        </div>
+                    </div>
+                    
+                    <button type="button" class="btn-update" onclick="updateProfile()">
+                        💾 Update Profile
+                    </button>
+                </form>
+            </div>
+            
+            <!-- Account Settings -->
+            <div class="profile-card">
+                <h2>🔐 Account Security</h2>
+                <form class="profile-form">
+                    <div class="form-group">
+                        <label for="currentPassword">Current Password</label>
+                        <input type="password" id="currentPassword" placeholder="Enter current password">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="newPassword">New Password</label>
+                        <input type="password" id="newPassword" placeholder="Enter new password">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm New Password</label>
+                        <input type="password" id="confirmPassword" placeholder="Confirm new password">
+                    </div>
+                    
+                    <button type="button" class="btn-update" style="background: linear-gradient(135deg, #FF6B6B, #EE5A5A);">
+                        🔒 Change Password
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../components/sidebar.js"></script>
+    <script src="../js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadSidebar();
+        });
+        
+        function updateProfile() {
+            alert('Profile updated successfully! ✓');
+        }
+    </script>
+</body>
+</html>

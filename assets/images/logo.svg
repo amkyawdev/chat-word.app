@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#87CEEB"/>
+      <stop offset="50%" style="stop-color:#00BFFF"/>
+      <stop offset="100%" style="stop-color:#1E90FF"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Chat bubble background -->
+  <circle cx="50" cy="50" r="45" fill="url(#skyGradient)"/>
+  
+  <!-- Chat icon -->
+  <path d="M30 35 L70 35 Q75 35 75 40 L75 55 Q75 60 70 60 L45 60 L35 70 L35 60 L35 60 Q30 60 30 55 L30 40 Q30 35 35 35 Z" fill="white"/>
+  
+  <!-- Dots -->
+  <circle cx="40" cy="47" r="3" fill="url(#skyGradient)"/>
+  <circle cx="50" cy="47" r="3" fill="url(#skyGradient)"/>
+  <circle cx="60" cy="47" r="3" fill="url(#skyGradient)"/>
+</svg>

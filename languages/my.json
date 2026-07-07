@@ -1,0 +1,122 @@
+{
+  "app": {
+    "name": "Chat Word",
+    "tagline": "စကားဝှက်ဖြင့် ချိတ်ဆက်သည်",
+    "loading": "ဖွင့်လှစ်နေသည်...",
+    "version": "ဗားရှင်း 1.0.0"
+  },
+  "nav": {
+    "home": "ပင်မ",
+    "dashboard": "ဒိုင်ခွက်",
+    "profile": "ပရိုဖိုင်",
+    "settings": "ဆက်တင်များ",
+    "about": "အကြောင်းအရာ",
+    "logout": "ထွက်မည်"
+  },
+  "chat": {
+    "publicChat": "အများသူငှာ စကားပြောဆိုမှု",
+    "privateChat": "ကိုယ်ပိုင် စကားပြောဆိုမှု",
+    "send": "ပို့မည်",
+    "typeMessage": "မက်ဆေ့ချ်ရိုက်ထည့်ပါ...",
+    "online": "အွန်လိုင်း",
+    "offline": "အော့ဖ်လိုင်း",
+    "lastSeen": "နောက်ဆုံးမြင်သည့်",
+    "justNow": "ယခုအချိန်",
+    "typing": "ရိုက်နေသည်...",
+    "messages": "မက်ဆေ့ချ်များ",
+    "noMessages": "မက်ဆေ့ချ်မရှိသေးပါ"
+  },
+  "friends": {
+    "title": "သူငယ်ချင်းများ",
+    "online": "အွန်လိုင်း",
+    "offline": "အော့ဖ်လိုင်း",
+    "addFriend": "သူငယ်ချင်းထည့်မည်",
+    "removeFriend": "သူငယ်ချင်းဖယ်ရှားမည်",
+    "requests": "သူငယ်ချင်းတောင်းဆိုမှုများ",
+    "suggestions": "အကြံပြုသူများ"
+  },
+  "dashboard": {
+    "title": "ဒိုင်ခွက်",
+    "overview": "အနှစ်ချုပ်",
+    "totalUsers": "စုစုပေါင်းအသုံးပြုသူ",
+    "totalMessages": "စုစုပေါင်းမက်ဆေ့ချ်",
+    "onlineNow": "လက်ရှိအွန်လိုင်း",
+    "activeDays": "တက်ကြွသောနေ့များ",
+    "recentActivity": "မကြာသေးမီလှုပ်ရှားမှု",
+    "messageActivity": "မက်ဆေ့ချ်လှုပ်ရှားမှု",
+    "userGrowth": "အသုံးပြုသူတိုးတက်မှု"
+  },
+  "profile": {
+    "title": "ပရိုဖိုင်",
+    "personalInfo": "ကိုယ်ရေးအချက်အလက်များ",
+    "activityOverview": "လှုပ်ရှားမှုအနှစ်ချုပ်",
+    "accountSecurity": "အကောင့်လုံခြုံမှု",
+    "messagesSent": "ပို့ခဲ့သောမက်ဆေ့ချ်",
+    "friends": "သူငယ်ချင်းများ",
+    "daysActive": "တက်ကြွသောနေ့များ",
+    "updateProfile": "ပရိုဖိုင်အသစ်ပြင်ဆင်မည်",
+    "changePassword": "စကားဝှက်ပြောင်းမည်",
+    "changeAvatar": "အာကာသပုံပြောင်းမည်"
+  },
+  "settings": {
+    "title": "ဆက်တင်များ",
+    "notifications": "အသိပေးချက်များ",
+    "pushNotifications": "Push အသိပေးချက်များ",
+    "soundAlerts": "အသံအသိပေးချက်များ",
+    "desktopNotifications": "ဒက်စ်တော့အသိပေးချက်များ",
+    "appearance": "အသွင်အပြင်",
+    "themeColor": "အရောင်ဒီဇိုင်း",
+    "darkMode": "အမှောင်နည်းပါးမုဒ်",
+    "language": "ဘာသာစကား",
+    "selectLanguage": "ဘာသာစကားရွေးချယ်ပါ",
+    "privacy": "ကိုယ်ပိုင်မှု",
+    "showOnlineStatus": "အွန်လိုင်းအခြေအနေပြမည်",
+    "showLastSeen": "နောက်ဆုံးမြင်သည့်ကိုပြမည်",
+    "saveSettings": "ဆက်တင်များသိမ်းမည်"
+  },
+  "about": {
+    "title": "အကြောင်းအရာ",
+    "ourStory": "ကျွန်ုပ်တို့၏ပုံပြင်",
+    "keyFeatures": "အဓိကလုပ်ဆောင်မှုများ",
+    "ourTeam": "ကျွန်ုပ်တို့၏အဖွဲ့",
+    "versionInfo": "ဗားရှင်းအချက်အလက်",
+    "realTimeChat": "အချိန်နှင့်တပြေးညီစကားပြောဆိုမှု",
+    "beautifulThemes": "လှပသောဒီဇိုင်းများ",
+    "multiLanguage": "ဘာသာစကားအမျိုးမျိုး",
+    "responsiveDesign": "တုံ့ပြန်မှုရှိသောဒီဇိုင်း",
+    "privacyFirst": "ကိုယ်ပိုင်မှုဦးစားပေး",
+    "fastPerformance": "မြန်ဆန်သောလုပ်ဆောင်မှု"
+  },
+  "errors": {
+    "generic": "အမှားတစ်ခုဖြစ်ပွားသည်",
+    "networkError": "အင်တာနက်ချိတ်ဆက်မှုမအောင်မြင်ပါ",
+    "notFound": "မတွေ့ရှိပါ",
+    "unauthorized": "ခွင့်ပြုချက်မရှိပါ",
+    "serverError": "ဆာဗာအမှား",
+    "tryAgain": "ထပ်မံကြိုးစားပါ"
+  },
+  "common": {
+    "save": "သိမ်းမည်",
+    "cancel": "မလုပ်ဆောင်ပါ",
+    "delete": "ဖျက်မည်",
+    "edit": "ပြင်ဆင်မည်",
+    "close": "ပိတ်မည်",
+    "confirm": "အတည်ပြုမည်",
+    "search": "ရှာဖွေမည်",
+    "loading": "ဖွင့်လှစ်နေသည်...",
+    "success": "အောင်မြင်သည်",
+    "error": "အမှား",
+    "warning": "သတိပေးချက်",
+    "info": "အချက်အလက်",
+    "yes": "ဟုတ်ကဲ့",
+    "no": "မဟုတ်ပါ"
+  },
+  "time": {
+    "justNow": "ယခုအချိန်",
+    "minutesAgo": "မိနစ်အနည်းငယ်က",
+    "hoursAgo": "နာရီအနည်းငယ်က",
+    "daysAgo": "ရက်အနည်းငယ်က",
+    "today": "ယနေ့",
+    "yesterday": "မနေ့က"
+  }
+}
