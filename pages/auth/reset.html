@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Word - Reset Password</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(180deg, #87CEEB 0%, #B0E0E6 50%, #E0F4FF 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .auth-container {
+            width: 100%;
+            max-width: 420px;
+        }
+        .auth-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 25px 50px rgba(135, 206, 235, 0.6);
+        }
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .auth-logo {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        .auth-title {
+            color: #1E90FF;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .auth-subtitle {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-label {
+            display: block;
+            color: #1E90FF;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid rgba(135, 206, 235, 0.3);
+            border-radius: 12px;
+            font-size: 15px;
+            transition: all 0.3s;
+            background: white;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #1E90FF;
+            box-shadow: 0 0 0 4px rgba(0, 191, 255, 0.15);
+        }
+        .btn-reset {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #00BFFF, #1E90FF);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 191, 255, 0.4);
+        }
+        .btn-reset:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 191, 255, 0.5);
+        }
+        .btn-reset:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .auth-links {
+            text-align: center;
+            margin-top: 24px;
+        }
+        .auth-link {
+            color: #1E90FF;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .auth-link:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            text-decoration: none;
+            font-size: 13px;
+        }
+        .back-link:hover {
+            color: #1E90FF;
+        }
+        .alert {
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            display: none;
+        }
+        .alert.error {
+            background: #fef2f2;
+            color: #ef4444;
+            border: 1px solid #fecaca;
+        }
+        .alert.success {
+            background: #f0fdf4;
+            color: #22c55e;
+            border: 1px solid #bbf7d0;
+        }
+        .alert.show {
+            display: block;
+        }
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .info-box {
+            background: #E0F4FF;
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .info-box p {
+            color: #1E90FF;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="auth-logo">🔑</div>
+                <h1 class="auth-title">Reset Password</h1>
+                <p class="auth-subtitle">Enter your email address and we'll send you a link to reset your password</p>
+            </div>
+            
+            <div class="alert" id="alertBox"></div>
+            
+            <div class="info-box">
+                <p>📧 You'll receive an email with instructions to reset your password</p>
+            </div>
+            
+            <form id="resetForm">
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input 
+                        type="email" 
+                        class="form-input" 
+                        id="email" 
+                        placeholder="Enter your registered email"
+                        required
+                        autocomplete="email"
+                    >
+                </div>
+                
+                <button type="submit" class="btn-reset" id="resetBtn">
+                    Send Reset Link
+                </button>
+            </form>
+            
+            <div class="auth-links">
+                <p style="color: #666; font-size: 14px;">
+                    Remember your password? 
+                    <a href="login.html" class="auth-link">Sign In</a>
+                </p>
+            </div>
+            
+            <a href="../../index.html" class="back-link">← Back to Home</a>
+        </div>
+    </div>
+
+    <script>
+        // Supabase credentials
+        const SUPABASE_URL = 'YOUR_SUPABASE_URL';
+        const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+        
+        // Initialize Supabase
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        // Form elements
+        const resetForm = document.getElementById('resetForm');
+        const emailInput = document.getElementById('email');
+        const resetBtn = document.getElementById('resetBtn');
+        const alertBox = document.getElementById('alertBox');
+        
+        // Show alert
+        function showAlert(message, type = 'error') {
+            alertBox.textContent = message;
+            alertBox.className = `alert ${type} show`;
+            setTimeout(() => {
+                alertBox.classList.remove('show');
+            }, 5000);
+        }
+        
+        // Reset handler
+        resetForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = emailInput.value.trim();
+            
+            if (!email) {
+                showAlert('Please enter your email address');
+                return;
+            }
+            
+            // Show loading
+            resetBtn.disabled = true;
+            resetBtn.innerHTML = '<span class="loading-spinner"></span> Sending...';
+            
+            try {
+                const { error } = await supabase.auth.resetPasswordForEmail(email, {
+                    redirectTo: `${window.location.origin}/pages/auth/update-password.html`
+                });
+                
+                if (error) throw error;
+                
+                showAlert('Password reset link sent! Check your email.', 'success');
+                emailInput.value = '';
+                
+            } catch (error) {
+                showAlert(error.message || 'Failed to send reset link. Please try again.');
+            } finally {
+                resetBtn.disabled = false;
+                resetBtn.textContent = 'Send Reset Link';
+            }
+        });
+    </script>
+</body>
+</html>

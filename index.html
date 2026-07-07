@@ -226,72 +226,61 @@
     
     <script>
         // Initialize Supabase
-        // Replace with your Supabase credentials from https://supabase.com/dashboard/project/_/settings/api
         const SUPABASE_URL = 'YOUR_SUPABASE_URL';
         const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
         
-        // Create Supabase client
         let supabase = null;
         
         async function initSupabase() {
             try {
                 if (typeof window.supabase !== 'undefined') {
                     supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-                    console.log('✅ Supabase client initialized');
                     return true;
-                } else {
-                    console.warn('⚠️ Supabase SDK not loaded');
-                    return false;
                 }
             } catch (error) {
-                console.error('❌ Failed to initialize Supabase:', error);
-                return false;
+                console.error('Failed to initialize Supabase:', error);
             }
+            return false;
         }
         
-        // Simulate loading progress
-        let progress = 0;
-        const progressBar = document.getElementById('progress');
-        const statusText = document.getElementById('status-text');
-        
-        const loadingSteps = [
-            { progress: 20, text: 'Loading resources...', delay: 300 },
-            { progress: 40, text: 'Connecting to database...', delay: 500 },
-            { progress: 60, text: 'Initializing Supabase...', delay: 400 },
-            { progress: 80, text: 'Setting up real-time connection...', delay: 300 },
-            { progress: 100, text: 'Ready!', delay: 200 }
-        ];
-        
-        async function startLoading() {
-            for (const step of loadingSteps) {
-                await new Promise(resolve => setTimeout(resolve, step.delay));
-                progress = step.progress;
-                progressBar.style.width = progress + '%';
-                statusText.textContent = step.text;
+        async function checkAuthAndRedirect() {
+            const progressBar = document.getElementById('progress');
+            const statusText = document.getElementById('status-text');
+            
+            // Loading steps
+            statusText.textContent = 'Loading resources...';
+            progressBar.style.width = '25%';
+            await new Promise(r => setTimeout(r, 300));
+            
+            const initialized = await initSupabase();
+            progressBar.style.width = '50%';
+            statusText.textContent = initialized ? 'Checking authentication...' : 'Connecting...';
+            await new Promise(r => setTimeout(r, 400));
+            
+            if (initialized && supabase) {
+                const { data: { session } } = await supabase.auth.getSession();
+                progressBar.style.width = '75%';
+                statusText.textContent = 'Verifying session...';
+                await new Promise(r => setTimeout(r, 300));
+                
+                if (session) {
+                    // User is logged in, go to main chat
+                    progressBar.style.width = '100%';
+                    statusText.textContent = 'Welcome back!';
+                    await new Promise(r => setTimeout(r, 500));
+                    window.location.href = 'pages/main.html';
+                    return;
+                }
             }
             
-            // Redirect to main page
-            setTimeout(() => {
-                window.location.href = 'pages/main.html';
-            }, 300);
+            // User not logged in, go to login
+            progressBar.style.width = '100%';
+            statusText.textContent = 'Redirecting to login...';
+            await new Promise(r => setTimeout(r, 500));
+            window.location.href = 'pages/auth/login.html';
         }
         
-        // Initialize and start loading
-        document.addEventListener('DOMContentLoaded', async () => {
-            await initSupabase();
-            startLoading();
-        });
-        
-        // Keyboard shortcut to skip loading (for testing)
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                progress = 100;
-                progressBar.style.width = '100%';
-                setTimeout(() => {
-                    window.location.href = 'pages/main.html';
-                }, 200);
-            }
-        });
+        document.addEventListener('DOMContentLoaded', checkAuthAndRedirect);
     </script>
 </body>
 </html>
