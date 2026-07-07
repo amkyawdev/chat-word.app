@@ -6,6 +6,11 @@
     <title>Chat Word - Loading</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/animations.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
     <style>
         * {
             margin: 0;
@@ -19,31 +24,43 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             overflow: hidden;
         }
         
         .loader-container {
             text-align: center;
+            max-width: 500px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            box-shadow: 0 25px 50px rgba(135, 206, 235, 0.6);
         }
         
         .logo {
-            font-size: 48px;
+            font-size: 64px;
             font-weight: 700;
             color: #1E90FF;
             margin-bottom: 30px;
-            text-shadow: 2px 2px 4px rgba(135, 206, 235, 0.5);
+            text-shadow: 2px 4px 8px rgba(135, 206, 235, 0.5);
+        }
+        
+        .logo-subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 40px;
         }
         
         .loader {
-            width: 60px;
-            height: 60px;
-            border: 5px solid rgba(135, 206, 235, 0.3);
+            width: 70px;
+            height: 70px;
+            border: 5px solid rgba(135, 206, 235, 0.2);
             border-top: 5px solid #00BFFF;
             border-right: 5px solid #1E90FF;
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
+            margin: 0 auto 30px;
         }
         
         @keyframes spin {
@@ -53,8 +70,9 @@
         
         .loading-text {
             color: #1E90FF;
-            font-size: 18px;
-            font-weight: 500;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 25px;
             animation: pulse 1.5s ease-in-out infinite;
         }
         
@@ -64,10 +82,10 @@
         }
         
         .progress-bar {
-            width: 200px;
-            height: 6px;
-            background: rgba(135, 206, 235, 0.3);
-            border-radius: 3px;
+            width: 100%;
+            height: 8px;
+            background: rgba(135, 206, 235, 0.2);
+            border-radius: 4px;
             margin: 20px auto 0;
             overflow: hidden;
         }
@@ -77,7 +95,7 @@
             background: linear-gradient(90deg, #87CEEB, #00BFFF, #1E90FF);
             background-size: 200% 100%;
             animation: shimmer 2s ease infinite;
-            border-radius: 3px;
+            border-radius: 4px;
             width: 0%;
             transition: width 0.3s ease;
         }
@@ -85,6 +103,12 @@
         @keyframes shimmer {
             0% { background-position: -200% center; }
             100% { background-position: 200% center; }
+        }
+        
+        .status-text {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #888;
         }
         
         /* Floating clouds effect */
@@ -100,42 +124,42 @@
         
         .cloud {
             position: absolute;
-            background: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.8);
             border-radius: 50%;
-            filter: blur(8px);
-            animation: floatCloud 20s linear infinite;
+            filter: blur(12px);
+            animation: floatCloud 25s linear infinite;
         }
         
         .cloud:nth-child(1) {
-            width: 100px;
-            height: 40px;
+            width: 150px;
+            height: 60px;
             top: 10%;
-            left: -100px;
+            left: -150px;
             animation-delay: 0s;
         }
         
         .cloud:nth-child(2) {
-            width: 120px;
-            height: 50px;
+            width: 180px;
+            height: 75px;
             top: 30%;
-            left: -120px;
-            animation-delay: 5s;
+            left: -180px;
+            animation-delay: 8s;
         }
         
         .cloud:nth-child(3) {
-            width: 80px;
-            height: 35px;
+            width: 120px;
+            height: 50px;
             top: 60%;
-            left: -80px;
-            animation-delay: 10s;
+            left: -120px;
+            animation-delay: 15s;
         }
         
         .cloud:nth-child(4) {
-            width: 150px;
-            height: 60px;
+            width: 200px;
+            height: 80px;
             top: 80%;
-            left: -150px;
-            animation-delay: 15s;
+            left: -200px;
+            animation-delay: 22s;
         }
         
         @keyframes floatCloud {
@@ -144,24 +168,35 @@
                 opacity: 0;
             }
             10% {
-                opacity: 0.6;
+                opacity: 0.8;
             }
             90% {
-                opacity: 0.6;
+                opacity: 0.8;
             }
             100% {
-                transform: translateX(calc(100vw + 200px));
+                transform: translateX(calc(100vw + 300px));
                 opacity: 0;
             }
         }
         
-        /* Version text */
         .version {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 30px;
+            right: 30px;
+            color: rgba(30, 144, 255, 0.7);
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .powered-by {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
             color: rgba(30, 144, 255, 0.6);
-            font-size: 12px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
     </style>
 </head>
@@ -177,43 +212,83 @@
     <!-- Loader Container -->
     <div class="loader-container">
         <div class="logo">💬 Chat Word</div>
+        <div class="logo-subtitle">Connecting People Worldwide</div>
         <div class="loader"></div>
         <div class="loading-text">Loading...</div>
         <div class="progress-bar">
             <div class="progress-bar-fill" id="progress"></div>
         </div>
+        <div class="status-text" id="status-text">Initializing Supabase...</div>
     </div>
     
     <div class="version">v1.0.0</div>
+    <div class="powered-by">⚡ Powered by Supabase</div>
     
     <script>
+        // Initialize Supabase
+        const SUPABASE_URL = 'YOUR_SUPABASE_URL';
+        const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+        
+        // Create Supabase client
+        let supabase = null;
+        
+        async function initSupabase() {
+            try {
+                if (typeof window.supabase !== 'undefined') {
+                    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                    console.log('✅ Supabase client initialized');
+                    return true;
+                } else {
+                    console.warn('⚠️ Supabase SDK not loaded');
+                    return false;
+                }
+            } catch (error) {
+                console.error('❌ Failed to initialize Supabase:', error);
+                return false;
+            }
+        }
+        
         // Simulate loading progress
         let progress = 0;
         const progressBar = document.getElementById('progress');
+        const statusText = document.getElementById('status-text');
         
-        const loadingInterval = setInterval(() => {
-            progress += Math.random() * 15;
-            if (progress > 100) progress = 100;
-            progressBar.style.width = progress + '%';
-            
-            if (progress === 100) {
-                clearInterval(loadingInterval);
-                setTimeout(() => {
-                    // Redirect to main page
-                    window.location.href = 'pages/main.html';
-                }, 500);
+        const loadingSteps = [
+            { progress: 20, text: 'Loading resources...', delay: 300 },
+            { progress: 40, text: 'Connecting to database...', delay: 500 },
+            { progress: 60, text: 'Initializing Supabase...', delay: 400 },
+            { progress: 80, text: 'Setting up real-time connection...', delay: 300 },
+            { progress: 100, text: 'Ready!', delay: 200 }
+        ];
+        
+        async function startLoading() {
+            for (const step of loadingSteps) {
+                await new Promise(resolve => setTimeout(resolve, step.delay));
+                progress = step.progress;
+                progressBar.style.width = progress + '%';
+                statusText.textContent = step.text;
             }
-        }, 300);
+            
+            // Redirect to main page
+            setTimeout(() => {
+                window.location.href = 'pages/main.html';
+            }, 300);
+        }
+        
+        // Initialize and start loading
+        document.addEventListener('DOMContentLoaded', async () => {
+            await initSupabase();
+            startLoading();
+        });
         
         // Keyboard shortcut to skip loading (for testing)
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' || e.key === ' ') {
                 progress = 100;
                 progressBar.style.width = '100%';
-                clearInterval(loadingInterval);
                 setTimeout(() => {
                     window.location.href = 'pages/main.html';
-                }, 300);
+                }, 200);
             }
         });
     </script>

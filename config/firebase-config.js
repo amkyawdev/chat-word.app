@@ -1,132 +1,211 @@
 /**
- * Firebase Configuration
- * Firebase setup for real-time database and authentication
+ * Supabase Configuration
+ * Supabase setup for real-time database, authentication, and storage
  * 
- * NOTE: This is a placeholder configuration.
- * Replace with your actual Firebase project credentials.
+ * Replace with your actual Supabase project credentials from:
+ * https://supabase.com/dashboard/project/_/settings/api
  */
 
-// Firebase configuration object
-const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
-};
+// Supabase configuration object
+const SUPABASE_URL = 'YOUR_SUPABASE_URL';
+const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
 
-// Firebase services (uncomment when Firebase is set up)
-// import { initializeApp } from "firebase/app";
-// import { getAuth } from "firebase/auth";
-// import { getDatabase } from "firebase/database";
-// import { getFirestore } from "firebase/firestore";
-// import { getStorage } from "firebase/storage";
+// Initialize Supabase client
+let supabase = null;
 
-/**
- * Initialize Firebase
- * Call this function to initialize Firebase services
- */
-function initializeFirebase() {
-    // Check if Firebase is already initialized
-    if (typeof firebase !== 'undefined' && !firebase.apps.length) {
-        // Initialize Firebase
-        // firebase.initializeApp(firebaseConfig);
-        
-        console.log('Firebase configuration loaded (not initialized - requires credentials)');
+function initializeSupabase() {
+    if (typeof window.supabase !== 'undefined') {
+        supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        console.log('Supabase initialized successfully');
         return true;
-    } else if (typeof firebase === 'undefined') {
-        console.warn('Firebase SDK not loaded');
+    } else {
+        console.warn('Supabase SDK not loaded. Add the script tag to your HTML.');
         return false;
     }
-    return true;
 }
 
 /**
- * Get Firebase services
- * Returns initialized Firebase services
+ * Supabase Client Getter
  */
-// export function getAuthService() {
-//     return firebase.auth();
-// }
-
-// export function getDatabaseService() {
-//     return firebase.database();
-// }
-
-// export function getFirestoreService() {
-//     return firebase.firestore();
-// }
-
-// export function getStorageService() {
-//     return firebase.storage();
-// }
+function getSupabase() {
+    if (!supabase) {
+        initializeSupabase();
+    }
+    return supabase;
+}
 
 /**
- * Authentication helpers
+ * Supabase Auth Helpers
  */
-// export async function signIn(email, password) {
-//     return firebase.auth().signInWithEmailAndPassword(email, password);
-// }
+export async function signUp(email, password, userData = {}) {
+    const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: { data: userData }
+    });
+    if (error) throw error;
+    return data;
+}
 
-// export async function signUp(email, password) {
-//     return firebase.auth().createUserWithEmailAndPassword(email, password);
-// }
+export async function signIn(email, password) {
+    const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password
+    });
+    if (error) throw error;
+    return data;
+}
 
-// export async function signOut() {
-//     return firebase.auth().signOut();
-// }
+export async function signOut() {
+    const { error } = await supabase.auth.signOut();
+    if (error) throw error;
+}
 
-// export function onAuthStateChange(callback) {
-//     return firebase.auth().onAuthStateChanged(callback);
-// }
+export function onAuthStateChange(callback) {
+    return supabase.auth.onAuthStateChange(callback);
+}
+
+export function getCurrentUser() {
+    return supabase.auth.getUser();
+}
 
 /**
- * Real-time database helpers
+ * Supabase Database Helpers
  */
-// export function pushMessage(chatId, message) {
-//     return firebase.database().ref(`chats/${chatId}/messages`).push(message);
-// }
 
-// export function onMessagesUpdate(chatId, callback) {
-//     return firebase.database().ref(`chats/${chatId}/messages`)
-//         .orderByChild('timestamp')
-//         .limitToLast(100)
-//         .on('value', callback);
-// }
+// Users
+export async function createUserProfile(userId, profileData) {
+    const { data, error } = await supabase
+        .from('profiles')
+        .insert([{ id: userId, ...profileData }])
+        .select()
+        .single();
+    if (error) throw error;
+    return data;
+}
 
-// export function setUserOnlineStatus(userId, isOnline) {
-//     return firebase.database().ref(`users/${userId}`).update({
-//         online: isOnline,
-//         lastSeen: firebase.database.ServerValue.TIMESTAMP
-//     });
-// }
+export async function getUserProfile(userId) {
+    const { data, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', userId)
+        .single();
+    if (error) throw error;
+    return data;
+}
 
-/**
- * Firestore helpers
- */
-// export async function saveUserProfile(userId, profileData) {
-//     return firebase.firestore().collection('users').doc(userId).set(profileData);
-// }
+export async function updateUserProfile(userId, updates) {
+    const { data, error } = await supabase
+        .from('profiles')
+        .update(updates)
+        .eq('id', userId)
+        .select()
+        .single();
+    if (error) throw error;
+    return data;
+}
 
-// export async function getUserProfile(userId) {
-//     const doc = await firebase.firestore().collection('users').doc(userId).get();
-//     return doc.exists ? doc.data() : null;
-// }
+// Messages
+export async function sendMessage(chatId, message) {
+    const { data, error } = await supabase
+        .from('messages')
+        .insert([{ chat_id: chatId, ...message }])
+        .select()
+        .single();
+    if (error) throw error;
+    return data;
+}
 
-// export function subscribeToMessages(chatId, callback) {
-//     return firebase.firestore().collection('chats').doc(chatId)
-//         .collection('messages')
-//         .orderBy('timestamp', 'desc')
-//         .limit(50)
-//         .onSnapshot(callback);
-// }
+export async function getMessages(chatId, limit = 50) {
+    const { data, error } = await supabase
+        .from('messages')
+        .select('*')
+        .eq('chat_id', chatId)
+        .order('created_at', { ascending: false })
+        .limit(limit);
+    if (error) throw error;
+    return data;
+}
+
+export function subscribeToMessages(chatId, callback) {
+    return supabase
+        .channel('messages')
+        .on('postgres_changes', 
+            { event: 'INSERT', schema: 'public', table: 'messages', filter: `chat_id=eq.${chatId}` },
+            callback
+        )
+        .subscribe();
+}
+
+// Friends
+export async function addFriend(userId, friendId) {
+    const { data, error } = await supabase
+        .from('friendships')
+        .insert([{ user_id: userId, friend_id: friendId, status: 'pending' }])
+        .select()
+        .single();
+    if (error) throw error;
+    return data;
+}
+
+export async function getFriends(userId) {
+    const { data, error } = await supabase
+        .from('friendships')
+        .select(`
+            *,
+            friend:profiles!friend_id(id, username, avatar, status)
+        `)
+        .eq('user_id', userId)
+        .eq('status', 'accepted');
+    if (error) throw error;
+    return data;
+}
+
+// Online Status
+export async function setUserOnline(userId, isOnline) {
+    const { error } = await supabase
+        .from('profiles')
+        .update({ 
+            online: isOnline, 
+            last_seen: new Date().toISOString() 
+        })
+        .eq('id', userId);
+    if (error) throw error;
+}
+
+export function subscribeToOnlineUsers(callback) {
+    return supabase
+        .channel('online-users')
+        .on('postgres_changes', 
+            { event: '*', schema: 'public', table: 'profiles' },
+            callback
+        )
+        .subscribe();
+}
 
 // Export
+export { supabase, SUPABASE_URL, SUPABASE_ANON_KEY };
+
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
-        firebaseConfig,
-        initializeFirebase
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY,
+        initializeSupabase,
+        getSupabase,
+        signUp,
+        signIn,
+        signOut,
+        onAuthStateChange,
+        getCurrentUser,
+        createUserProfile,
+        getUserProfile,
+        updateUserProfile,
+        sendMessage,
+        getMessages,
+        subscribeToMessages,
+        addFriend,
+        getFriends,
+        setUserOnline,
+        subscribeToOnlineUsers
     };
 }

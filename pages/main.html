@@ -6,154 +6,332 @@
     <title>Chat Word - Main</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/animations.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         .app-container {
             display: flex;
             min-height: 100vh;
+            background: linear-gradient(180deg, #87CEEB 0%, #B0E0E6 50%, #E0F4FF 100%);
         }
         
         .main-content {
             flex: 1;
-            margin-left: 250px;
-            padding: 20px;
-            background: linear-gradient(180deg, #87CEEB 0%, #B0E0E6 50%, #E0F4FF 100%);
+            padding: 30px 40px;
+            max-width: 100%;
         }
         
         .header {
             background: linear-gradient(135deg, #00BFFF, #1E90FF);
             color: white;
-            padding: 20px 30px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 8px rgba(135, 206, 235, 0.4);
+            padding: 30px 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 24px rgba(0, 191, 255, 0.4);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
         .header h1 {
-            font-size: 28px;
-            margin-bottom: 5px;
+            font-size: 32px;
+            margin-bottom: 8px;
         }
         
         .header p {
+            opacity: 0.95;
+            font-size: 16px;
+        }
+        
+        .header-stats {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 28px;
+            font-weight: 700;
+        }
+        
+        .stat-label {
+            font-size: 13px;
             opacity: 0.9;
-            font-size: 14px;
         }
         
         .chat-area {
             display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 20px;
-            height: calc(100vh - 150px);
+            grid-template-columns: 350px 1fr;
+            gap: 30px;
+            height: calc(100vh - 200px);
         }
         
         .friends-panel {
             background: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(135, 206, 235, 0.3);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 8px 24px rgba(135, 206, 235, 0.3);
             overflow-y: auto;
+        }
+        
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #E0F4FF;
+        }
+        
+        .panel-header h3 {
+            color: #1E90FF;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .online-count {
+            background: linear-gradient(135deg, #4ade80, #22c55e);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
         }
         
         .chat-panel {
             background: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(135, 206, 235, 0.3);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 8px 24px rgba(135, 206, 235, 0.3);
             display: flex;
             flex-direction: column;
         }
         
         .chat-header {
-            border-bottom: 2px solid #87CEEB;
-            padding-bottom: 15px;
-            margin-bottom: 15px;
+            border-bottom: 2px solid #E0F4FF;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .chat-header h3 {
+            color: #1E90FF;
+            font-size: 22px;
+            margin-bottom: 6px;
         }
         
         .chat-messages {
             flex: 1;
             overflow-y: auto;
-            padding-right: 10px;
+            padding-right: 15px;
+        }
+        
+        .chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .chat-messages::-webkit-scrollbar-track {
+            background: #E0F4FF;
+            border-radius: 3px;
+        }
+        
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: #87CEEB;
+            border-radius: 3px;
         }
         
         .chat-input {
             display: flex;
-            gap: 10px;
-            margin-top: 15px;
+            gap: 15px;
+            margin-top: 20px;
         }
         
         .chat-input input {
             flex: 1;
-            padding: 12px;
+            padding: 16px 20px;
             border: 2px solid #87CEEB;
-            border-radius: 8px;
-            font-size: 14px;
+            border-radius: 14px;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+        
+        .chat-input input:focus {
+            border-color: #1E90FF;
+            box-shadow: 0 0 0 4px rgba(0, 191, 255, 0.15);
         }
         
         .chat-input button {
-            padding: 12px 24px;
+            padding: 16px 32px;
             background: linear-gradient(135deg, #00BFFF, #1E90FF);
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 14px;
             cursor: pointer;
             font-weight: 600;
+            font-size: 15px;
             transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 191, 255, 0.4);
         }
         
         .chat-input button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(135, 206, 235, 0.5);
+            box-shadow: 0 6px 20px rgba(0, 191, 255, 0.5);
         }
         
-        @media (max-width: 768px) {
+        /* User card styles */
+        .user-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px;
+            border-radius: 12px;
+            transition: all 0.3s;
+            margin-bottom: 8px;
+        }
+        
+        .user-card:hover {
+            background: linear-gradient(135deg, rgba(135, 206, 235, 0.15), rgba(0, 191, 255, 0.15));
+            transform: translateX(4px);
+        }
+        
+        .user-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #87CEEB, #00BFFF);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+        
+        .user-info {
+            flex: 1;
+        }
+        
+        .user-name {
+            font-weight: 600;
+            color: #1E90FF;
+            font-size: 15px;
+        }
+        
+        .user-status {
+            font-size: 13px;
+            color: #4ade80;
+        }
+        
+        @media (max-width: 1024px) {
             .chat-area {
                 grid-template-columns: 1fr;
             }
             
             .main-content {
-                margin-left: 0;
+                padding: 20px;
+            }
+            
+            .header {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .header-stats {
+                justify-content: center;
             }
         }
     </style>
 </head>
 <body>
-    <div class="app-container">
+    <div class="app-container modal-container">
         <!-- Sidebar will be loaded here -->
         <div id="sidebar-container"></div>
         
         <!-- Main Content -->
         <main class="main-content">
             <div class="header">
-                <h1>💬 Public Chat</h1>
-                <p>Welcome to the global chat room</p>
+                <div>
+                    <h1>💬 Public Chat</h1>
+                    <p>Welcome to the global chat room • Connect with people worldwide</p>
+                </div>
+                <div class="header-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">89</div>
+                        <div class="stat-label">Online Now</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">1.2K</div>
+                        <div class="stat-label">Messages Today</div>
+                    </div>
+                </div>
             </div>
             
             <div class="chat-area">
                 <!-- Friends List -->
                 <div class="friends-panel">
-                    <h3 style="color: #1E90FF; margin-bottom: 15px;">👥 Online Users</h3>
+                    <div class="panel-header">
+                        <h3>👥 Online Users <span class="online-count">89</span></h3>
+                    </div>
                     <div id="friends-list">
                         <!-- Friends will be loaded here -->
+                        <div class="user-card">
+                            <div class="user-avatar">👩</div>
+                            <div class="user-info">
+                                <div class="user-name">Alice Smith</div>
+                                <div class="user-status">● Online</div>
+                            </div>
+                        </div>
+                        <div class="user-card">
+                            <div class="user-avatar">👨</div>
+                            <div class="user-info">
+                                <div class="user-name">Bob Johnson</div>
+                                <div class="user-status">● Online</div>
+                            </div>
+                        </div>
+                        <div class="user-card">
+                            <div class="user-avatar">🧑</div>
+                            <div class="user-info">
+                                <div class="user-name">Charlie Brown</div>
+                                <div class="user-status">● Online</div>
+                            </div>
+                        </div>
+                        <div class="user-card">
+                            <div class="user-avatar">👸</div>
+                            <div class="user-info">
+                                <div class="user-name">Diana Prince</div>
+                                <div class="user-status">● Online</div>
+                            </div>
+                        </div>
+                        <div class="user-card">
+                            <div class="user-avatar">👩‍🦰</div>
+                            <div class="user-info">
+                                <div class="user-name">Eve Wilson</div>
+                                <div class="user-status">● Online</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- Chat Panel -->
                 <div class="chat-panel">
                     <div class="chat-header">
-                        <h3 style="color: #1E90FF;">🌐 Global Chat</h3>
+                        <h3>🌐 Global Chat</h3>
                         <small style="color: #666;">Chat with everyone online</small>
                     </div>
                     
                     <div class="chat-messages" id="chat-messages">
                         <!-- Messages will appear here -->
                         <div class="chat-bubble received">
-                            <strong>System</strong>
-                            <p>Welcome to the chat! Start messaging...</p>
+                            <strong>System 🤖</strong>
+                            <p>Welcome to the chat! Start messaging with people around the world 🌍</p>
                         </div>
                     </div>
                     
                     <div class="chat-input">
                         <input type="text" id="message-input" placeholder="Type your message..." autocomplete="off">
-                        <button id="send-btn">Send</button>
+                        <button id="send-btn">Send 💬</button>
                     </div>
                 </div>
             </div>
@@ -168,9 +346,6 @@
             // Load sidebar
             loadSidebar();
             
-            // Load friends list
-            loadFriendsList();
-            
             // Chat functionality
             const messageInput = document.getElementById('message-input');
             const sendBtn = document.getElementById('send-btn');
@@ -179,8 +354,19 @@
             function sendMessage() {
                 const message = messageInput.value.trim();
                 if (message) {
-                    addMessage('You', message, 'sent');
+                    addMessage('You 👤', message, 'sent');
                     messageInput.value = '';
+                    
+                    // Simulate response
+                    setTimeout(() => {
+                        const responses = [
+                            { name: 'Alice 👩', text: 'That\'s great! 👍' },
+                            { name: 'Bob 👨', text: 'Interesting point! 💡' },
+                            { name: 'Charlie 🧑', text: 'I agree! 🎉' }
+                        ];
+                        const response = responses[Math.floor(Math.random() * responses.length)];
+                        addMessage(response.name, response.text, 'received');
+                    }, 1000 + Math.random() * 2000);
                 }
             }
             

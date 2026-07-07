@@ -1,4 +1,4 @@
-/* Main Stylesheet - chat-word */
+/* Main Stylesheet - chat-word - Modern Modal Design */
 
 :root {
   /* Sky Blue Theme Colors */
@@ -17,6 +17,7 @@
   --bg-primary: var(--sky-pale);
   --bg-secondary: #ffffff;
   --bg-gradient: var(--sky-gradient);
+  --bg-glass: rgba(255, 255, 255, 0.95);
   
   /* Text Colors */
   --text-primary: #1a1a2e;
@@ -25,8 +26,14 @@
   
   /* Shadows */
   --shadow-sm: 0 2px 4px rgba(135, 206, 235, 0.3);
-  --shadow-md: 0 4px 8px rgba(135, 206, 235, 0.4);
-  --shadow-lg: 0 8px 16px rgba(135, 206, 235, 0.5);
+  --shadow-md: 0 8px 24px rgba(135, 206, 235, 0.4);
+  --shadow-lg: 0 16px 48px rgba(135, 206, 235, 0.5);
+  --shadow-xl: 0 25px 50px rgba(135, 206, 235, 0.6);
+  
+  /* Modal */
+  --modal-width: 1400px;
+  --modal-padding: 40px;
+  --modal-radius: 24px;
 }
 
 /* Reset & Base Styles */
@@ -42,57 +49,86 @@ html, body {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background: var(--bg-gradient);
   color: var(--text-primary);
   line-height: 1.6;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
-/* Sky Blue Background for all pages */
+/* Modal Container - Full Website as Modal */
+.modal-container {
+  max-width: var(--modal-width);
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+  box-shadow: var(--shadow-xl);
+  position: relative;
+}
+
+/* Glassmorphism Effect */
+.glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Page Container */
 .page-container,
 .main-container,
 .dashboard-container,
 .settings-container,
 .profile-container,
 .about-container {
-  background: var(--bg-gradient);
+  background: transparent;
   min-height: 100vh;
   width: 100%;
+  padding: var(--modal-padding);
 }
 
-/* Cards with Sky Blue Theme */
+/* Modern Cards */
 .card {
   background: var(--bg-secondary);
-  border-radius: 12px;
+  border-radius: 16px;
   box-shadow: var(--shadow-md);
-  padding: 20px;
-  border: 1px solid rgba(135, 206, 235, 0.3);
+  padding: 24px;
+  border: 1px solid rgba(135, 206, 235, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
 }
 
 .card-header {
   background: linear-gradient(135deg, var(--sky-light), var(--sky-medium));
   color: var(--text-light);
-  padding: 15px 20px;
-  border-radius: 12px 12px 0 0;
+  padding: 20px 24px;
+  border-radius: 16px 16px 0 0;
   font-weight: 600;
+  font-size: 18px;
 }
 
-/* Buttons with Sky Blue Theme */
+/* Modern Buttons */
 .btn-primary {
   background: linear-gradient(135deg, var(--sky-medium), var(--sky-dark));
   color: var(--text-light);
   border: none;
-  padding: 10px 24px;
-  border-radius: 8px;
+  padding: 14px 32px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: var(--shadow-sm);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 191, 255, 0.4);
+  font-weight: 600;
+  font-size: 15px;
 }
 
 .btn-primary:hover {
   background: linear-gradient(135deg, var(--sky-dark), var(--sky-medium));
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 8px 24px rgba(0, 191, 255, 0.5);
   transform: translateY(-2px);
 }
 
@@ -100,51 +136,74 @@ body {
   background: var(--bg-secondary);
   color: var(--sky-dark);
   border: 2px solid var(--sky-medium);
-  padding: 10px 24px;
-  border-radius: 8px;
+  padding: 14px 32px;
+  border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
+  font-weight: 600;
 }
 
 .btn-secondary:hover {
   background: var(--sky-pale);
   border-color: var(--sky-dark);
+  transform: translateY(-2px);
 }
 
-/* Input Fields */
+.btn-ghost {
+  background: transparent;
+  color: var(--sky-dark);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-ghost:hover {
+  background: rgba(135, 206, 235, 0.1);
+}
+
+/* Modern Input Fields */
 input[type="text"],
 input[type="email"],
 input[type="password"],
-textarea {
+textarea,
+select {
   width: 100%;
-  padding: 12px 16px;
-  border: 2px solid var(--sky-light);
-  border-radius: 8px;
+  padding: 16px 20px;
+  border: 2px solid rgba(135, 206, 235, 0.3);
+  border-radius: 12px;
   background: var(--bg-secondary);
   color: var(--text-primary);
   transition: all 0.3s ease;
+  font-size: 15px;
 }
 
 input:focus,
-textarea:focus {
+textarea:focus,
+select:focus {
   outline: none;
   border-color: var(--sky-medium);
-  box-shadow: 0 0 0 3px rgba(135, 206, 235, 0.3);
+  box-shadow: 0 0 0 4px rgba(135, 206, 235, 0.2);
 }
 
-/* Navigation */
+/* Modern Navigation Bar */
 .navbar {
   background: linear-gradient(90deg, var(--sky-medium), var(--sky-dark));
-  padding: 15px 30px;
+  padding: 20px 40px;
   box-shadow: var(--shadow-md);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .nav-link {
   color: var(--text-light);
   text-decoration: none;
-  padding: 8px 16px;
-  border-radius: 6px;
+  padding: 12px 24px;
+  border-radius: 10px;
   transition: all 0.3s ease;
+  font-weight: 500;
 }
 
 .nav-link:hover {
@@ -152,46 +211,82 @@ textarea:focus {
   color: var(--text-light);
 }
 
-/* Sidebar */
+/* Sidebar - Modern Slide Menu */
 .sidebar {
   background: var(--bg-secondary);
-  border-right: 1px solid var(--sky-light);
   height: 100vh;
   position: fixed;
-  left: 0;
+  left: -280px;
   top: 0;
-  width: 250px;
+  width: 280px;
+  padding: 30px 20px;
+  box-shadow: var(--shadow-lg);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+.sidebar-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.sidebar-header {
   padding: 20px;
-  box-shadow: var(--shadow-sm);
+  border-bottom: 2px solid var(--sky-pale);
+  margin-bottom: 20px;
 }
 
 .sidebar-menu a {
   display: flex;
   align-items: center;
-  padding: 12px 16px;
+  gap: 12px;
+  padding: 16px 20px;
   color: var(--text-secondary);
   text-decoration: none;
-  border-radius: 8px;
+  border-radius: 12px;
   transition: all 0.3s ease;
   margin-bottom: 8px;
+  font-weight: 500;
 }
 
 .sidebar-menu a:hover,
 .sidebar-menu a.active {
-  background: var(--sky-pale);
+  background: linear-gradient(135deg, rgba(135, 206, 235, 0.2), rgba(0, 191, 255, 0.2));
   color: var(--sky-dark);
-  font-weight: 500;
+  font-weight: 600;
 }
 
-/* Chat Components */
+.sidebar-menu .nav-icon {
+  font-size: 20px;
+}
+
+/* Chat Components - Modern */
 .chat-bubble {
   background: var(--bg-secondary);
-  border-radius: 16px;
-  padding: 12px 16px;
-  margin-bottom: 10px;
+  border-radius: 20px;
+  padding: 16px 20px;
+  margin-bottom: 12px;
   max-width: 70%;
   box-shadow: var(--shadow-sm);
-  border: 1px solid var(--sky-light);
+  border: 1px solid rgba(135, 206, 235, 0.2);
 }
 
 .chat-bubble.sent {
@@ -202,32 +297,39 @@ textarea:focus {
 }
 
 .chat-bubble.received {
-  border-left: 3px solid var(--sky-medium);
+  border-left: 4px solid var(--sky-medium);
 }
 
-/* User Avatar with Sky Blue Ring */
+/* User Avatar */
 .avatar {
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   border: 3px solid var(--sky-light);
   object-fit: cover;
+  transition: all 0.3s ease;
+}
+
+.avatar:hover {
+  transform: scale(1.1);
+  border-color: var(--sky-medium);
 }
 
 .avatar.online {
   border-color: #4ade80;
+  box-shadow: 0 0 12px rgba(74, 222, 128, 0.4);
 }
 
 .avatar.offline {
   border-color: #9ca3af;
 }
 
-/* Active Status Indicator */
+/* Status Indicator */
 .status-indicator {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  border: 2px solid var(--bg-secondary);
+  border: 3px solid var(--bg-secondary);
 }
 
 .status-indicator.online {
@@ -238,46 +340,48 @@ textarea:focus {
   background: #9ca3af;
 }
 
-/* Loading Animation with Sky Blue */
+/* Modern Loading Animation */
 .loader {
-  border: 4px solid var(--sky-pale);
+  border: 4px solid rgba(135, 206, 235, 0.2);
   border-top: 4px solid var(--sky-medium);
+  border-right: 4px solid var(--sky-dark);
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   animation: spin 1s linear infinite;
 }
 
-/* Badges */
+/* Modern Badges */
 .badge {
   background: linear-gradient(135deg, var(--sky-medium), var(--sky-dark));
   color: var(--text-light);
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 12px;
+  padding: 6px 14px;
+  border-radius: 24px;
+  font-size: 13px;
   font-weight: 600;
 }
 
-/* Tables */
+/* Modern Tables */
 table {
   width: 100%;
   border-collapse: collapse;
   background: var(--bg-secondary);
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-md);
 }
 
 th {
   background: linear-gradient(135deg, var(--sky-light), var(--sky-medium));
   color: var(--text-light);
-  padding: 12px 16px;
+  padding: 16px 20px;
   text-align: left;
   font-weight: 600;
+  font-size: 15px;
 }
 
 td {
-  padding: 12px 16px;
+  padding: 16px 20px;
   border-bottom: 1px solid var(--sky-pale);
 }
 
@@ -285,7 +389,7 @@ tr:hover {
   background: var(--sky-pale);
 }
 
-/* Scrollbar */
+/* Modern Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -293,6 +397,7 @@ tr:hover {
 
 ::-webkit-scrollbar-track {
   background: var(--sky-pale);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -304,15 +409,26 @@ tr:hover {
   background: var(--sky-medium);
 }
 
-/* Responsive Design */
+/* Responsive Design - Mobile First */
 @media (max-width: 768px) {
+  :root {
+    --modal-width: 100%;
+    --modal-padding: 20px;
+    --modal-radius: 16px;
+  }
+  
   .sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
+    width: 280px;
   }
   
   .card {
-    margin: 10px;
+    margin: 0;
+    border-radius: 16px;
+  }
+  
+  .btn-primary,
+  .btn-secondary {
+    padding: 12px 24px;
+    width: 100%;
   }
 }
