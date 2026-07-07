@@ -196,6 +196,17 @@
             color: #aaa;
             font-size: 12px;
         }
+        
+        .redirect-text {
+            font-size: 13px;
+            color: #888;
+            margin-top: 20px;
+        }
+        
+        .redirect-text span {
+            color: #667eea;
+            font-weight: 700;
+        }
     </style>
 </head>
 <body>
@@ -231,6 +242,8 @@
             <a href="pages/auth/login.html" class="btn btn-primary">Sign In</a>
             <a href="pages/auth/register.html" class="btn btn-secondary">Create Account</a>
         </div>
+        
+        <p class="redirect-text" id="redirectText">Redirecting to register in <span id="countdown">15</span>s...</p>
         
         <div class="footer-links">
             <a href="pages/about.html">About</a>
@@ -290,11 +303,25 @@
                 }
             }
             
-            // Step 4: Redirect
+            // Step 4: Redirect to register after 15 seconds
             progress.style.width = '100%';
             status.textContent = 'Redirecting...';
             await new Promise(r => setTimeout(r, 300));
-            window.location.href = 'pages/auth/login.html';
+            
+            // Start 15 second countdown to register page
+            let seconds = 15;
+            const countdownEl = document.getElementById('countdown');
+            const redirectTextEl = document.getElementById('redirectText');
+            
+            const countdown = setInterval(() => {
+                seconds--;
+                countdownEl.textContent = seconds;
+                
+                if (seconds <= 0) {
+                    clearInterval(countdown);
+                    window.location.href = 'pages/auth/register.html';
+                }
+            }, 1000);
         }
         
         document.addEventListener('DOMContentLoaded', checkAuthAndRedirect);
