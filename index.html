@@ -12,52 +12,86 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            background: linear-gradient(180deg, #87CEEB 0%, #B0E0E6 50%, #E0F4FF 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', sans-serif;
             overflow: hidden;
+        }
+        
+        .background-effects {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: float 15s linear infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
         }
         
         .loader-container {
             text-align: center;
-            max-width: 500px;
-            padding: 40px;
+            max-width: 480px;
+            padding: 50px 60px;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
-            border-radius: 30px;
-            box-shadow: 0 25px 50px rgba(135, 206, 235, 0.6);
+            border-radius: 32px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
         }
         
         .logo {
-            font-size: 64px;
+            font-size: 72px;
+            margin-bottom: 20px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .logo-title {
+            font-size: 32px;
             font-weight: 700;
-            color: #1E90FF;
-            margin-bottom: 30px;
-            text-shadow: 2px 4px 8px rgba(135, 206, 235, 0.5);
+            color: #1a1a2e;
+            margin-bottom: 8px;
         }
         
         .logo-subtitle {
-            font-size: 18px;
+            font-size: 16px;
             color: #666;
             margin-bottom: 40px;
         }
         
-        .loader {
-            width: 70px;
-            height: 70px;
-            border: 5px solid rgba(135, 206, 235, 0.2);
-            border-top: 5px solid #00BFFF;
-            border-right: 5px solid #1E90FF;
+        .loader-ring {
+            width: 80px;
+            height: 80px;
+            border: 4px solid rgba(102, 126, 234, 0.2);
+            border-top-color: #667eea;
+            border-right-color: #764ba2;
             border-radius: 50%;
             animation: spin 1s linear infinite;
             margin: 0 auto 30px;
@@ -69,163 +103,145 @@
         }
         
         .loading-text {
-            color: #1E90FF;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 600;
+            color: #667eea;
             margin-bottom: 25px;
-            animation: pulse 1.5s ease-in-out infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
         }
         
         .progress-bar {
             width: 100%;
-            height: 8px;
-            background: rgba(135, 206, 235, 0.2);
-            border-radius: 4px;
-            margin: 20px auto 0;
+            height: 10px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 10px;
             overflow: hidden;
+            margin-bottom: 20px;
         }
         
-        .progress-bar-fill {
+        .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #87CEEB, #00BFFF, #1E90FF);
-            background-size: 200% 100%;
-            animation: shimmer 2s ease infinite;
-            border-radius: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 10px;
             width: 0%;
-            transition: width 0.3s ease;
-        }
-        
-        @keyframes shimmer {
-            0% { background-position: -200% center; }
-            100% { background-position: 200% center; }
+            transition: width 0.4s ease;
         }
         
         .status-text {
-            margin-top: 15px;
             font-size: 14px;
             color: #888;
+            margin-bottom: 30px;
         }
         
-        /* Floating clouds effect */
-        .clouds {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 30px;
         }
         
-        .cloud {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 50%;
-            filter: blur(12px);
-            animation: floatCloud 25s linear infinite;
+        .btn {
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
         }
         
-        .cloud:nth-child(1) {
-            width: 150px;
-            height: 60px;
-            top: 10%;
-            left: -150px;
-            animation-delay: 0s;
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
         }
         
-        .cloud:nth-child(2) {
-            width: 180px;
-            height: 75px;
-            top: 30%;
-            left: -180px;
-            animation-delay: 8s;
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
         }
         
-        .cloud:nth-child(3) {
-            width: 120px;
-            height: 50px;
-            top: 60%;
-            left: -120px;
-            animation-delay: 15s;
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
         }
         
-        .cloud:nth-child(4) {
-            width: 200px;
-            height: 80px;
-            top: 80%;
-            left: -200px;
-            animation-delay: 22s;
+        .btn-secondary:hover {
+            background: rgba(102, 126, 234, 0.05);
+            transform: translateY(-2px);
         }
         
-        @keyframes floatCloud {
-            0% {
-                transform: translateX(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.8;
-            }
-            90% {
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateX(calc(100vw + 300px));
-                opacity: 0;
-            }
+        .footer-links {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .footer-links a {
+            color: #888;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #667eea;
         }
         
         .version {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            color: rgba(30, 144, 255, 0.7);
-            font-size: 14px;
-            font-weight: 500;
-        }
-        
-        .powered-by {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            color: rgba(30, 144, 255, 0.6);
-            font-size: 13px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            margin-top: 30px;
+            color: #aaa;
+            font-size: 12px;
         }
     </style>
 </head>
 <body>
-    <!-- Floating Clouds -->
-    <div class="clouds">
-        <div class="cloud"></div>
-        <div class="cloud"></div>
-        <div class="cloud"></div>
-        <div class="cloud"></div>
+    <!-- Background Effects -->
+    <div class="background-effects">
+        <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+        <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
+        <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
+        <div class="particle" style="left: 40%; animation-delay: 1s;"></div>
+        <div class="particle" style="left: 50%; animation-delay: 3s;"></div>
+        <div class="particle" style="left: 60%; animation-delay: 5s;"></div>
+        <div class="particle" style="left: 70%; animation-delay: 2.5s;"></div>
+        <div class="particle" style="left: 80%; animation-delay: 1.5s;"></div>
+        <div class="particle" style="left: 90%; animation-delay: 4.5s;"></div>
     </div>
     
     <!-- Loader Container -->
     <div class="loader-container">
-        <div class="logo">💬 Chat Word</div>
-        <div class="logo-subtitle">Connecting People Worldwide</div>
-        <div class="loader"></div>
+        <div class="logo">💬</div>
+        <h1 class="logo-title">Chat Word</h1>
+        <p class="logo-subtitle">Connecting People Worldwide</p>
+        
+        <div class="loader-ring"></div>
         <div class="loading-text">Loading...</div>
+        
         <div class="progress-bar">
-            <div class="progress-bar-fill" id="progress"></div>
+            <div class="progress-fill" id="progress"></div>
         </div>
-        <div class="status-text" id="status-text">Initializing Supabase...</div>
+        
+        <p class="status-text" id="status-text">Initializing...</p>
+        
+        <div class="action-buttons">
+            <a href="pages/auth/login.html" class="btn btn-primary">Sign In</a>
+            <a href="pages/auth/register.html" class="btn btn-secondary">Create Account</a>
+        </div>
+        
+        <div class="footer-links">
+            <a href="pages/about.html">About</a>
+            <a href="pages/setting.html">Settings</a>
+        </div>
+        
+        <p class="version">Version 1.0.0 • Powered by Supabase</p>
     </div>
     
-    <div class="version">v1.0.0</div>
-    <div class="powered-by">⚡ Powered by Supabase</div>
-    
     <script>
-        // Initialize Supabase
+        // Supabase credentials
         const SUPABASE_URL = 'YOUR_SUPABASE_URL';
         const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
         
@@ -244,39 +260,40 @@
         }
         
         async function checkAuthAndRedirect() {
-            const progressBar = document.getElementById('progress');
-            const statusText = document.getElementById('status-text');
+            const progress = document.getElementById('progress');
+            const status = document.getElementById('status-text');
             
-            // Loading steps
-            statusText.textContent = 'Loading resources...';
-            progressBar.style.width = '25%';
-            await new Promise(r => setTimeout(r, 300));
-            
-            const initialized = await initSupabase();
-            progressBar.style.width = '50%';
-            statusText.textContent = initialized ? 'Checking authentication...' : 'Connecting...';
+            // Step 1: Load
+            status.textContent = 'Loading resources...';
+            progress.style.width = '25%';
             await new Promise(r => setTimeout(r, 400));
             
+            // Step 2: Connect
+            const initialized = await initSupabase();
+            progress.style.width = '50%';
+            status.textContent = initialized ? 'Connecting to database...' : 'Initializing...';
+            await new Promise(r => setTimeout(r, 400));
+            
+            // Step 3: Check
             if (initialized && supabase) {
                 const { data: { session } } = await supabase.auth.getSession();
-                progressBar.style.width = '75%';
-                statusText.textContent = 'Verifying session...';
+                progress.style.width = '75%';
+                status.textContent = 'Verifying session...';
                 await new Promise(r => setTimeout(r, 300));
                 
                 if (session) {
-                    // User is logged in, go to main chat
-                    progressBar.style.width = '100%';
-                    statusText.textContent = 'Welcome back!';
+                    progress.style.width = '100%';
+                    status.textContent = 'Welcome back!';
                     await new Promise(r => setTimeout(r, 500));
                     window.location.href = 'pages/main.html';
                     return;
                 }
             }
             
-            // User not logged in, go to login
-            progressBar.style.width = '100%';
-            statusText.textContent = 'Redirecting to login...';
-            await new Promise(r => setTimeout(r, 500));
+            // Step 4: Redirect
+            progress.style.width = '100%';
+            status.textContent = 'Redirecting...';
+            await new Promise(r => setTimeout(r, 300));
             window.location.href = 'pages/auth/login.html';
         }
         
